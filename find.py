@@ -116,16 +116,16 @@ owlMaskInvList = []
 for i in range(len(image)):
     totalRows = (image[i].shape[0])
     totalCols = (image[i].shape[1])
-    scaleR = (totalRows[i]/float(owlRows))
-    scaleC = (totalCols[i]/float(owlCols))
+    scaleR = (totalRows/float(owlRows))
+    scaleC = (totalCols/float(owlCols))
     r = owlRows*scaleR
     c = owlCols*scaleC
-    owlImages.append(cv.resize(owl,(int(c),int(r))))
-    owlMaskList.append(cv.resize(owlMask,(int(c),int(r))))
-    owlMaskInvList.append(cv.resize(owlMaskInv,(int(c),int(r))))
-    owlImages[i] = cv.bitwise_and(owlImages[i],owlImages[i],mask=owlMaskInvList[i])
-    image[i] = cv.bitwise_and(image[i],image[i],mask=owlMaskList[i])
-    image[i] = cv.add(image[i],owlImages[i])
+    owlImages = (cv.resize(owl,(int(c),int(r))))
+    owlMaskList = (cv.resize(owlMask,(int(c),int(r))))
+    owlMaskInvList = (cv.resize(owlMaskInv,(int(c),int(r))))
+    owlImages = cv.bitwise_and(owlImages,owlImages,mask=owlMaskInvList)
+    image[i] = cv.bitwise_and(image[i],image[i],mask=owlMaskList)
+    image[i] = cv.add(image[i],owlImages)
 
 
 for i in range(len(greenObjects)):
